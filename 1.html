@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      请输入人民币金额 <input type="text" placeholder="请输入" id="ipus">
+</body>
+<script>
+        var inputs = document.getElementById('ipus')
+        //  代码输出问题 
+        console.log(1)   //1. script 是一个宏任务，按照顺序执行这些代码 先打印1
+        setTimeout(function(){   //遇到了定时器 ，他是一个宏任务放进宏任务队列
+            console.log(2)
+        },0)
+        new Promise((resolve) => {
+            // 首页进入promise 执行该构造函数 打印3
+            console.log(3,this)
+            resolve();
+        }).then(()=>{
+            // 碰到了Promise.then这是个微任务 ， 将他放入微任务队列
+            console.log(4,this)
+        })
+        // 继续往下面走执行7
+        console.log(5)
+        // 执行顺序 1，3，5，  宏任务和微任务一个队列先执行微任务 4 ， 2
+        // 判断数组的几种方式
+        var obj = []
+        //通过原型链做判断
+        console.log( obj._proto_ == Array.prototype )
+        var num = ''
+        // inputs.addEventListener('input',(event)=>{
+        //     //  console.log(event.target.value)
+        //      num = event.target.value
+        //     if(typeof num == 'Number' &&  num > 0 && num < 10){
+        //     if(num == 1){
+        //         console.log('壹')
+        //     }else if(num == 2){
+        //         console.log('贰')
+        //     }else if(num == 3){
+        //         console.log('叄')
+        //     }
+        // }
+        // })
+        setTimeout(()=>{
+            console.log('-------------------------------------')
+            console.log(sua)
+            sua()
+            function sua (){
+              console.log('1111')
+            }
+            var sua = 'name'
+            console.log(sua)
+        },0)
+
+        setTimeout(()=>{
+           function add(){
+               var a = 0
+               console.log(arguments)
+               for(var key  in arguments){
+                     a += arguments[key]
+               }
+               return a
+           }
+           console.log(add(1,10,20,39))
+        })
+        function add(){
+                var a = 0 
+                console.log(typeof arguments,this,'0000000000000000000')
+                var arr = [1,2,3,5,6]
+                 for(var key in arguments){
+                      a+=arguments[key]
+                 }
+                return a
+        }
+        add()
+        setTimeout(()=>{
+             function add(){
+                var a = 0 
+                console.log(typeof arguments,this)
+                var arr = [1,2,3,5,6]
+                 for(var key in arguments){
+                      a+=arguments[key]
+                 }
+                return a
+             }
+             console.log(add(1,3,9,6),'另外一种方法',this)
+        })
+        setTimeout(()=>{
+            console.log('THIS')
+            var agg = 100
+            function printy(){
+               var agg = 110
+            //    console.log(agg , this.agg)
+               function b(){
+                 console.log(agg , this.agg)
+               }
+               var agg =101
+               return b
+            }
+          var dome  = printy()
+          dome()
+          dome()
+        })
+
+        var empyo = {
+            cmoply: 'fzy'
+        }
+        // var ab  = empyo
+        var ab  = Object.create(empyo)
+        console.log(ab , 'k看看这')
+        delete ab.cmoply
+        console.log(ab.cmoply)
+    //    Number
+       var numsty = 100 ; 
+       function MNAS(){
+           function b(){
+            console.log('WADSAD', numsty)
+           }
+           var numsty = 200 ; 
+           console.log('QWE', numsty)
+           return b
+       }
+       MNAS()
+       var dos =  MNAS()
+       dos()
+    //    if(typeof num)
+        // 人民币判断
+        var y = 1
+        z = y =typeof z
+        console.log(z)
+        function openWebview(){
+	         var w = plus.webview.open('http://m.weibo.cn/u/3196963860');
+          }
+          openWebview()
+</script>
+</html>
